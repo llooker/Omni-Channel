@@ -127,12 +127,20 @@
     name: RFV
     model: omni_channel
     explore: omni_channel_transactions
-    type: treemap
+    type: omnichannel_demo::treemap
     fields: [c360.customer_count, c360.rfm_rating]
     sorts: [c360.customer_count desc]
     limit: 500
     column_limit: 50
-    hidden_fields: []
+    dynamic_fields:
+    - table_calculation: count_output
+      label: Count Output
+      expression: "${c360.customer_count}"
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      _type_hint: number
+    hidden_fields: [c360.customer_count]
     hidden_points_if_no: []
     series_labels: {}
     show_view_names: false
